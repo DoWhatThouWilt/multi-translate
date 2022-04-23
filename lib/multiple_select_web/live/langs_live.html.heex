@@ -1,0 +1,54 @@
+<section>
+  <h3>Selected Languages</h3>
+  <%= for lang <- @toggle_ids do %>
+    <%= lang %>
+  <% end %>
+  
+  <.form let={f} for={:translate} phx-update="ignore" phx-change="validate" phx-submit="submit">
+    <%= text_input f, :words%>
+    <%= submit "Translate" %>  
+  </.form>
+  
+  
+  <div class="row">
+    <input 
+      type="checkbox" 
+      name="toggle-all" 
+      id="toggle-all"
+      phx-click="toggle-all" 
+      phx-update="ignore" />
+    <label for="toggle-all">Toggle All</label>
+  </div>
+  
+  <div style="
+              display:grid;
+              grid-template-columns: repeat(5, 1fr);
+              grid-gap: 1rem;
+    ">
+      <%= for lang <- @langs do %>
+            <div style="display:flex;">
+              <label for={lang} style="margin-right:.5rem"><%= lang %></label>
+              <input 
+              type="checkbox"
+              name="toggle"
+              phx-click="toggle"
+              phx-value-toggle-id={lang}
+              checked={lang in @toggle_ids}
+              >
+            </div>
+      <% end %>
+  </div>
+  
+</section>
+
+<section>
+  <h2>Translations</h2>
+
+  <ul>
+    <%= for translation <- @translations do %>
+      <li>
+        <%= translation %>
+      </li>
+    <% end %>
+  </ul>
+</section>
