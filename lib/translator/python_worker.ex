@@ -45,8 +45,8 @@ defmodule Translator.PythonWorker do
 
   @impl true
   def handle_call({:translate, word, lang}, _from, pid) do
-    result = :python.call(pid, :python_translator, :translate, [word, lang])
+    {lang, translation} = :python.call(pid, :python_translator, :translate_tuple, [word, lang])
     Logger.info("[#{__MODULE__} #{inspect(pid)}] Handled call")
-    {:reply, to_string(result), pid}
+    {:reply, %{name: to_string(lang), translation: to_string(translation)}, pid}
   end
 end

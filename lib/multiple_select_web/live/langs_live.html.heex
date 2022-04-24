@@ -27,13 +27,13 @@
     ">
       <%= for lang <- @langs do %>
             <div style="display:flex;">
-              <label for={lang} style="margin-right:.5rem"><%= lang %></label>
+              <label for={lang.name} style="margin-right:.5rem"><%= lang.name %></label>
               <input 
               type="checkbox"
               name="toggle"
               phx-click="toggle"
-              phx-value-toggle-id={lang}
-              checked={lang in @toggle_ids}
+              phx-value-toggle-id={lang.code}
+              checked={lang.code in @toggle_ids}
               >
             </div>
       <% end %>
@@ -46,9 +46,14 @@
 
   <ul>
     <%= for translation <- @translations do %>
-      <li>
-        <%= translation %>
-      </li>
+          <li>
+              <h4>
+                <%= translation.name %>
+              </h4>
+              <p>
+                <%= translation.translation %>
+              </p>
+          </li>
     <% end %>
   </ul>
 </section>

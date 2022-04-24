@@ -52,7 +52,8 @@ defmodule Translator do
       %{code: "ru", name: "Russian"},
       %{code: "es", name: "Spanish"},
       %{code: "sv", name: "Swedish"},
-      %{code: "cy", name: "Welsh"}
+      %{code: "cy", name: "Welsh"},
+      %{code: "en", name: "English"}
     ]
   end
 

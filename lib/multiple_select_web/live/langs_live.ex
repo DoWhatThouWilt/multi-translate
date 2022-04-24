@@ -2,7 +2,7 @@ defmodule MultipleSelectWeb.LangsLive do
   use MultipleSelectWeb, :live_view
   import Phoenix.LiveView
 
-  @langs Translator.languages()
+  @langs Translator.languages_demo()
 
   def mount(_params, _session, socket) do
     {:ok,
@@ -25,7 +25,7 @@ defmodule MultipleSelectWeb.LangsLive do
   end
 
   def handle_event("toggle-all", %{"value" => "on"}, socket) do
-    {:noreply, assign(socket, :toggle_ids, @langs)}
+    {:noreply, assign(socket, :toggle_ids, @langs |> Enum.map(& &1.code))}
   end
 
   def handle_event("toggle-all", %{}, socket) do
