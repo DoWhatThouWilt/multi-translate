@@ -1,59 +1,104 @@
-<section>
-  <h3>Selected Languages</h3>
-  <%= for lang <- @toggle_ids do %>
-    <%= lang %>
-  <% end %>
-  
-  <.form let={f} for={:translate} phx-update="ignore" phx-change="validate" phx-submit="submit">
-    <%= text_input f, :words%>
-    <%= submit "Translate" %>  
-  </.form>
-  
-  
-  <div class="row">
-    <input 
-      type="checkbox" 
-      name="toggle-all" 
-      id="toggle-all"
-      phx-click="toggle-all" 
-      phx-update="ignore" />
-    <label for="toggle-all">Toggle All</label>
-  </div>
-  
-  <div style="
-              display:grid;
-              grid-template-columns: repeat(5, 1fr);
-              grid-gap: 1rem;
-    ">
-      <%= for lang <- @langs do %>
-            <div style="display:flex;">
-              <label for={lang.name} style="margin-right:.5rem"><%= lang.name %></label>
-              <input 
-              type="checkbox"
-              name="toggle"
-              phx-click="toggle"
-              phx-value-toggle-id={lang.code}
-              checked={lang.code in @toggle_ids}
-              >
+<div
+    class="font-body min-h-screen antialiased text-gray-600 bg-[#f9fafb] dark:text-[#b3c3d9] dark:bg-[#000000]"
+  >
+    <div class="dark:bg-gray-900 bg-white shadow-lg">
+      <div
+        class="px-4 mx-auto sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8 py-3"
+      >
+        <div
+          class="relative flex items-center"
+        >
+          <a href="#" class="inline-flex items-center mx-auto"
+            ><span
+              class="ml-2 font-extrabold text-gray-600 text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-400"
+              >Translate text into multiple languages</span></a>
+        </div>
+      </div>
+    </div>
+
+    <section class="">
+      <div class="px-4 max-w-7xl mx-auto py-0">
+        <div
+          class="mx-auto bg-white py-6 max-w-6xl shadow-md flex flex-col rounded-xl my-12 ring-slate-900/5 ring-1"
+        >
+        <.form let={f} for={:translate} phx-update="ignore" phx-change="validate" phx-submit="submit">
+            <%= textarea f, :words, class: "p-4 w-full rounded-none border-y border-gray-200 h-40", rows: 4 %>
+
+            <div class="px-6 mt-6">
+              <%= submit [class: "w-full text-center px-5 py-3 relative rounded-xl group text-white font-medium inline-block"] do %>
+                  <span class="absolute top-0 left-0 w-full h-full rounded-xl opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
+                  <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded-xl opacity-50 from-purple-600 to-blue-500"></span>
+                  <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded-xl shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
+                  <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded-xl bg-gradient-to-br to-purple-600 from-blue-500"></span>
+                  <span class="relative font-semibold text-3xl text-white uppercase">Translate</span>
+              <% end %>
             </div>
-      <% end %>
+
+          </.form>
+            <div class="space-y-2 py-4 block border-b">
+              <%# <h1 %>
+              <%#   class="text-center text-3xl mb-4 text-gray-600 font-medium" %>
+              <%# > %>
+              <%#   Select Languages %>
+              <%# </h1> %>
+              <div class="flex flex-row justify-evenly  border-0">
+            
+                <div class="flex items-center">
+                  <input
+                      type="checkbox" 
+                      name="toggle-all" 
+                      id="toggle-all"
+                      phx-click="toggle-all" 
+                      phx-update="ignore"
+                      class="border-2 rounded border-gray-500"
+                  />
+                  <p class="ml-2 font-medium">All Languages</p>
+                </div>
+            
+              </div>
+            </div>
+            
+            <%# Checkboxes %>
+            
+            <div class="px-6 grid grid-cols-4 gap-4 py-4">
+              <%= for lang <- @langs do %>
+                <label class="card" for={lang.name}>
+                  <input 
+                       type="checkbox" 
+                       class="card-input"
+                       name="toggle"
+                       checked={lang.code in @toggle_ids}
+                       />
+                  <div class="card-body group hover:bg-blue-400"
+                       phx-click="toggle"
+                       phx-value-toggle-id={lang.code}
+                    >
+                      <header class="h-12 bg-transparent flex items-center">
+                        <h2 class="font-medium group-hover:text-white"><%= lang.name %></h2>
+                      </header>
+                    </div>
+                  </label>
+              <% end %>
+            </div>
+            
+            
+          <div class="mt-8 px-6 grid grid-cols-2 gap-10">
+            <%= for translation <- @translations do %>
+              
+            <div class="">
+              <h1
+                class="text-gray-600 text-lg"
+              >
+              <%= translation.name %>
+              </h1>
+                <p class="leading-5 text-base text-gray-400">
+                 <%= translation.translation %> 
+                </p>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
-  
-</section>
-
-<section>
-  <h2>Translations</h2>
-
-  <ul>
-    <%= for translation <- @translations do %>
-          <li>
-              <h4>
-                <%= translation.name %>
-              </h4>
-              <p>
-                <%= translation.translation %>
-              </p>
-          </li>
-    <% end %>
-  </ul>
-</section>

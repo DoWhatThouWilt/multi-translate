@@ -26,7 +26,15 @@ config :multiple_select, MultipleSelectWeb.Endpoint,
   secret_key_base: "e+BS/Tienl8MT6tqQi6ydd0lckipNekXn0I4gJL7VzUAo1CvuCaXIpoF3+/7aW01",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--postcss",
+      "--watch",
+      cd: Path.expand("../assets", __DIR__)
+    ]
   ]
 
 # ## SSL Support
