@@ -33,6 +33,7 @@ defmodule MultipleSelect.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:erlport, "~>0.10.1"},
       {:poolboy, "~> 1.5"},
       {:phoenix, "~> 1.6.7"},
@@ -67,8 +68,8 @@ defmodule MultipleSelect.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.deploy": [
-        "cmd --cd assets npm run deploy",
         "esbuild default --minify",
+        "tailwind default --minify",
         "phx.digest"
       ]
     ]

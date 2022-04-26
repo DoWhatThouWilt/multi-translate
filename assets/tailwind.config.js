@@ -1,3 +1,5 @@
+// See the Tailwind configuration guide for advanced usage
+// https://tailwindcss.com/docs/configuration
 module.exports = {
   content: [
     './js/**/*.js',
@@ -5,11 +7,9 @@ module.exports = {
     '../lib/*_web/**/*.*ex'
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        'inter': ['Inter', 'sans-serif']
-      }
-    },
+    extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ]
 }

@@ -17,8 +17,7 @@ defmodule MultipleSelectWeb.Router do
   scope "/", MultipleSelectWeb do
     pipe_through :browser
 
-    live "/langs", LangsLive
-    get "/", PageController, :index
+    live "/", LangsLive
   end
 
   # Other scopes may use custom stacks.
