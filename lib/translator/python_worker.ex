@@ -37,7 +37,8 @@ defmodule Translator.PythonWorker do
       [:code.priv_dir(:multiple_select), "python"]
       |> Path.join()
 
-    with {:ok, pid} <- :python.start([{:python_path, to_charlist(path)}, {:python, 'python3'}]) do
+    with {:ok, pid} <-
+           :python.start([{:python_path, to_charlist(path)}, {:python, '/usr/bin/python3'}]) do
       Logger.info("[#{__MODULE__} #{inspect(pid)}] Started python worker")
       {:ok, pid}
     end

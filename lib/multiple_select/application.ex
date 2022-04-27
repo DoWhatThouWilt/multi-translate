@@ -33,8 +33,8 @@ defmodule MultipleSelect.Application do
     [
       {:name, {:local, :python_worker}},
       {:worker_module, Translator.PythonWorker},
-      {:size, 12},
-      {:max_overflow, 6}
+      {:size, 4},
+      {:max_overflow, 0}
     ]
   end
 
