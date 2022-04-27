@@ -1,4 +1,14 @@
-# MultipleSelect
+# Demo is [here](https://multi-translate.fly.dev/).
+
+
+
+# About
+
+Multi-Translate does speedy translation of text into multiple languages at the same by utilizing python workers using [translatepy](https://github.com/Animenosekai/translate) running inside concurrent elixir processes, which are called asynchronously. What inspired me to create this app was the limitation of translatepy being synchronous, only being able to translate a text into one language at a time.  Here, erlport is used to facilitate communication between elixir and python. Poolboy is used to manage the pool of python workers.
+
+
+
+# Multi-Translate
 
 To start your Phoenix server:
 
